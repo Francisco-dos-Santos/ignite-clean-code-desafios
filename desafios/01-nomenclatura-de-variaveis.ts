@@ -1,6 +1,6 @@
 // Nomenclatura de variáveis
 
-const list = [
+const users = [
   {
     title: 'User',
     followers: 5
@@ -20,34 +20,34 @@ const list = [
 ]
 
 export default async function getData(req, res) {
-  const github = String(req.query.username)
+  const githubOfUsername = String(req.query.username)
 
-  if (!github) {
+  if (!githubOfUsername) {
     return res.status(400).json({
       message: `Please provide an username to search on the github API`
     })
   }
 
-  const response = await fetch(`https://api.github.com/users/${github}`);
+  const userGithubResponse = await fetch(`https://api.github.com/users/${githubOfUsername}`);
 
-  if (response.status === 404) {
+  if (userGithubResponse.status === 404) {
     return res.status(400).json({
-      message: `User with username "${github}" not found`
+      message: `User with username "${githubOfUsername}" not found`
     })
   }
 
-  const data = await response.json()
+  const user = await userGithubResponse.json()
 
-  const orderList = list.sort((a, b) =>  b.followers - a.followers); 
+  const orderUsers = users.sort((a, b) =>  b.followers - a.followers); 
 
-  const category = orderList.find(i => data.followers > i.followers)
+  const category = orderUsers.find(follower => user.followers > follower.followers)
 
-  const result = {
-    github,
+  const userCategory = {
+    githubOfUsername,
     category: category.title
   }
 
-  return result
+  return userCategory
 }
 
 getData({ query: {
