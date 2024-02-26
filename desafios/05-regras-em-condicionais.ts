@@ -1,5 +1,5 @@
 const necessaryGradeToBeApproved = 7
-const studentGrade = 10
+const studentGrade= 10
 
 const numberOfAbsensesToFailSchool = 100
 const studentNumberOfAbsenses = 109

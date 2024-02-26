@@ -3,7 +3,7 @@ function getFirstFiveRatings(ratings) {
 }
 
 function sumFirstFiveRatings(ratings) {
-  const ratingsBool = !!ratings
+  const ratingsBool = Boolean(ratings)
 
   if (ratingsBool) {
     const firstFiveRatings = getFirstFiveRatings(ratings)
